@@ -1,0 +1,72 @@
+<!doctype html>
+<html ng-app="cocktailApp">
+    
+    <head>
+        <script src="js/angular.min.js"></script>
+        <script src="js/cocktail.js"></script>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/cocktailBootstrap.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header"> <a class="navbar-brand" href="#">Mixology Junction</a>
+
+                </div>
+            </div>
+        </nav>
+        <div class="container" ng-controller="CocktailController">
+            <div class="page-header">
+                 <h1>Cocktail Finder</h1>
+
+                <p class="lede">Muddled and befuddled by your booze cabinet? Enter what you have and find out what you can make.</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"> 
+
+                    <h3>Ingredients</h3>
+
+                    <div class="input-group">
+                      <input type="text" class="form-control" ng-model="ingredientText"  placeholder="Add ingredient">
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" ng-click="addIngredient()">Add</button>
+                      </span>
+                    </div>
+
+                    <ul class="list-group ingredients">
+                        <li ng-repeat="ingredient in ingredients"  class="list-group-item ingredient"> 
+                            <a href="" ng-click="removeIngredient(ingredient)">x</a>
+                            <span>{{ingredient}}</span>
+                        </li>
+                    </ul>
+ 
+
+                </div>
+                <div class="col-sm-8">
+                    <div ng-hide="ingredients.length < 2">
+                        <h3>Cocktails</h3>
+                        <p>Cocktails you can make with the ingredients {{ingredients.join(', ')}}:</p>
+                        <ul class="list-group available">
+                            <li ng-repeat="cocktail in filteredCocktails =(cocktails | filter: filterCocktails)" class="list-group-item available"> 
+                                <strong>{{cocktail.name}}</strong>
+                                <br> <em>{{cocktail.ingredients.join(', ')}}</em>
+
+                            </li>
+                            <li ng-hide="filteredCocktails.length" class="list-group-item empty">None - try adding more ingredients!</li>
+                        </ul>Add another ingredient to make:
+                        <ul class="list-group">
+                            <li ng-repeat="cocktail in filteredMoreCocktails =(cocktails | filter: filterMoreCocktails)" class="list-group-item nearlyAvailable"> 
+                                <strong>{{cocktail.name}}</strong>
+                                <br> <em>{{cocktail.ingredients.join(', ')}}</em>
+                            </li>
+                            <li ng-hide="filteredMoreCocktails.length"  class="list-group-item empty">No suggestions at this time - try adding more ingredients!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+
+</html>

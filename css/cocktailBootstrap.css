@@ -1,0 +1,23 @@
+body {
+  padding-top: 50px;
+}
+
+.ingredients {
+	margin-top: 20px;
+}
+
+.list-group .ingredient {
+	background-color: #f0f0ff;
+}
+
+.list-group .available  {
+	background-color: #ccffcc;
+}
+
+.list-group .nearlyAvailable  {
+	background-color: #ffff99;
+}
+
+.list-group .empty {
+	background-color: #ffffff;
+}
